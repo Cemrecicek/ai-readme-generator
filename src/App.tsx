@@ -12,7 +12,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-
+  const canGenerate = projectName.trim() && description.trim();
   const demoMarkdown = `
 # Task Manager App
 
@@ -81,8 +81,8 @@ npm run dev
       });
       console.log("RESULT:", result);
 
-      if (!result || result.includes("failed")) {
-        throw new Error("AI failed");
+      if (!result || result === "No response") {
+        throw new Error("AI returned empty response");
       }
 
       setGeneratedMarkdown(result);
@@ -92,7 +92,7 @@ npm run dev
     }
 
     setLoading(false);
-
+    console.log("IS DEMO:", isDemo);
 
   };
 
@@ -100,6 +100,7 @@ npm run dev
     <AppLayout
       onGenerate={handleGenerate}
       loading={loading}
+      canGenerate={!!canGenerate}
       left={
         <GeneratorForm
           projectName={projectName}

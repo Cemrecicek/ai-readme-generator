@@ -26,6 +26,6 @@ export async function generateReadme({
   }
 
   const data = await res.json();
-
+  console.log("BASE_URL:", BASE_URL);
   return data.result;
 }

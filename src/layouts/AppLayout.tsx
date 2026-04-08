@@ -5,6 +5,7 @@ type Props = {
   right: React.ReactNode;
   onGenerate: () => void;
   loading: boolean;
+  canGenerate: boolean;
 };
 
 export default function AppLayout({
@@ -12,6 +13,7 @@ export default function AppLayout({
   right,
   onGenerate,
   loading,
+  canGenerate
 }: Props) {
   return (
     <main className="min-h-screen bg-[#050816] text-slate-100 flex flex-col">
@@ -40,8 +42,8 @@ export default function AppLayout({
 
         {/* RIGHT - BUTTON */}
         <button
-          onClick={onGenerate}
-          disabled={loading}
+          onClick={() => onGenerate()}
+          disabled={loading||!canGenerate}
           className="rounded-xl bg-indigo-500 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-400 disabled:opacity-50"
         >
           {loading ? (
