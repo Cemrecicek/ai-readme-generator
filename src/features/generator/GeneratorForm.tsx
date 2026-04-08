@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { TECH_STACK } from "./techStack";
 
+
+
+
 type Props = {
   projectName: string;
   setProjectName: (value: string) => void;
@@ -8,6 +11,7 @@ type Props = {
   setDescription: (value: string) => void;
   selectedTags: string[];
   setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
+  onGenerate?: () => void;
 };
 
 export default function GeneratorForm({
@@ -17,6 +21,7 @@ export default function GeneratorForm({
   setDescription,
   selectedTags,
   setSelectedTags,
+  onGenerate,
 }: Props) {
   const [customTag, setCustomTag] = useState("");
 
@@ -41,21 +46,47 @@ export default function GeneratorForm({
   const removeTag = (tag: string) => {
     setSelectedTags((prev) => prev.filter((t) => t !== tag));
   };
+  const fillDemoData = () => {
+    setProjectName("Task Manager App");
+
+    setDescription(
+      "A modern task management web application that helps users organize their daily tasks, track progress, and improve productivity. It includes features like task creation, filtering, deadlines, and a clean user interface."
+    );
+
+    setSelectedTags([
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+    ]);
+  };
 
   return (
     <div className="flex flex-col h-full rounded-3xl border border-white/10 bg-[#07111f] p-6">
-      
+
       {/* TITLE */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold">Project Details</h2>
-        <p className="text-slate-400 text-sm mt-1">
-          Fill in your project information to generate a README
-        </p>
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="text-2xl font-semibold">Project Details</h2>
+          <p className="text-slate-400 text-sm mt-1">
+            Fill in your project information to generate a README
+          </p>
+        </div>
+
+        <button
+          onClick={() => {
+            fillDemoData()
+            setTimeout(() => onGenerate?.(), 200);
+          }}
+          className="text-xs px-3 py-1.5 rounded-lg bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/30 transition whitespace-nowrap self-start md:self-center"
+        >
+          Try Demo
+        </button>
       </div>
 
       {/* FORM */}
       <div className="flex flex-col gap-6">
-        
+
         {/* Project Name */}
         <div>
           <label className="block mb-2 text-sm font-medium">
@@ -101,10 +132,9 @@ export default function GeneratorForm({
                   onClick={() => toggleTag(tag)}
                   className={`
                     flex items-center gap-2 px-4 py-2 rounded-full text-sm transition
-                    ${
-                      isSelected
-                        ? "bg-indigo-500 text-white"
-                        : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                    ${isSelected
+                      ? "bg-indigo-500 text-white"
+                      : "bg-slate-800 text-slate-300 hover:bg-slate-700"
                     }
                   `}
                 >
