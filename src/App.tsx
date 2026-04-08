@@ -55,6 +55,16 @@ npm run dev
 
   const handleGenerate = async (isDemo = false) => {
 
+    setGeneratedMarkdown("");
+    setLoading(true);
+    setError("");
+
+    if (!isDemo && (!projectName || !description)) {
+      setError("Please fill project details first");
+      setLoading(false);
+      return;
+    }
+
     if (isDemo) {
       setGeneratedMarkdown(demoMarkdown);
       setError("");
@@ -63,16 +73,13 @@ npm run dev
     }
 
 
-    setGeneratedMarkdown("");
-    setLoading(true);
-    setError("");
-
     try {
       const result = await generateReadme({
         projectName,
         description,
         tags,
       });
+      console.log("RESULT:", result);
 
       if (!result || result.includes("failed")) {
         throw new Error("AI failed");
@@ -85,6 +92,8 @@ npm run dev
     }
 
     setLoading(false);
+
+
   };
 
   return (
