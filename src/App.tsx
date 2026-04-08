@@ -16,18 +16,40 @@ export default function App() {
   const demoMarkdown = `
 # Task Manager App
 
-A modern task management web application that helps users organize their daily tasks, track progress, and improve productivity.
+A modern task management web application that helps users organize their daily tasks, track progress, and improve productivity. Designed with a clean and responsive interface, it provides a simple yet powerful way to manage workflows.
 
 ## Features
-- Task creation & management
-- Filtering and deadlines
-- Clean and responsive UI
+- Create, edit, and delete tasks
+- Mark tasks as completed
+- Filter tasks by status
+- Responsive and clean UI
+- Fast and intuitive user experience
 
 ## Tech Stack
 - React
 - TypeScript
 - Tailwind CSS
 - Node.js
+
+## Installation
+
+\`\`\`bash
+git clone https://github.com/your-username/task-manager.git
+cd task-manager
+npm install
+npm run dev
+\`\`\`
+
+## Usage
+
+1. Add a new task using the input field
+2. Mark tasks as completed when done
+3. Filter tasks based on their status
+4. Manage your workflow efficiently
+
+---
+
+✨ This README was generated with AI README Generator
 `;
 
 
