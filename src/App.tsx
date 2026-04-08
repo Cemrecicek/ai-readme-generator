@@ -2,14 +2,45 @@ import { useState } from "react";
 import GeneratorForm from "./features/generator/GeneratorForm";
 import AppLayout from "./layouts/AppLayout";
 import PreviewPanel from "./features/generator/PreviewPanel";
+import { generateReadme } from "./lib/api";
 
 export default function App() {
   const [projectName, setProjectName] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState<string[]>([]);
+  const [generatedMarkdown, setGeneratedMarkdown] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleGenerate = async () => {
+    setGeneratedMarkdown("");
+    setLoading(true);
+    setError("");
+
+    try {
+      const result = await generateReadme({
+        projectName,
+        description,
+        tags,
+      });
+
+      if (!result || result.includes("failed")) {
+        throw new Error("AI failed");
+      }
+
+      setGeneratedMarkdown(result);
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Please try again.");
+    }
+
+    setLoading(false);
+  };
 
   return (
     <AppLayout
+      onGenerate={handleGenerate}
+      loading={loading}
       left={
         <GeneratorForm
           projectName={projectName}
@@ -18,6 +49,7 @@ export default function App() {
           setDescription={setDescription}
           selectedTags={tags}
           setSelectedTags={setTags}
+          onGenerate={handleGenerate}
         />
       }
       right={
@@ -25,6 +57,10 @@ export default function App() {
           projectName={projectName}
           description={description}
           tags={tags}
+          generatedMarkdown={generatedMarkdown}
+          loading={loading}
+          error={error}
+          onRetry={handleGenerate}
         />
       }
     />
