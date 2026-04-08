@@ -20,30 +20,30 @@ app.post("/generate", async (req, res) => {
   const { projectName, description, tags } = req.body;
 
   const prompt = `
-You are a senior developer.
+You are a professional software developer.
 
-Write a COMPLETE and professional README.md.
+Write a clean and realistic README.md file.
 
-IMPORTANT:
-- Use ONLY markdown headings (#, ##, ###)
-- Do NOT use === or ** instead of headings
-- Use bullet points with '-'
-- Make it detailed and realistic
+IMPORTANT RULES:
+- Only use the information provided below
+- Do NOT add features, tools, or technologies that are not listed
+- Do NOT assume anything extra
+- Keep it simple, clear, and realistic
+- Use proper markdown formatting
 
-Include:
+Include these sections:
 - Title
 - Description
 - Features
+- Tech Stack
 - Installation
 - Usage
-- Tech Stack
-- License
 
 Project Name: ${projectName}
 Description: ${description}
 Tech Stack: ${tags.join(", ")}
 
-Return ONLY markdown.
+Write a concise and accurate README.
 `;
 
   try {
