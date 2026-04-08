@@ -1,7 +1,7 @@
 # AI README Generator
 
 
-🔗 Live Demo: https://ai-readme-generator-mswguhbcx-cemreciceks-projects.vercel.app/
+🔗 Live Demo: https://ai-readme-generator-one.vercel.app
 
 
 An AI-powered web application that generates professional README.md files from user input. It helps developers quickly create structured documentation without writing everything manually.
