@@ -1,3 +1,5 @@
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 export async function generateReadme({
   projectName,
   description,
@@ -7,7 +9,7 @@ export async function generateReadme({
   description: string;
   tags: string[];
 }) {
-  const res = await fetch("http://localhost:3000/generate", {
+  const res = await fetch(`${BASE_URL}/generate`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,6 +20,10 @@ export async function generateReadme({
       tags,
     }),
   });
+
+  if (!res.ok) {
+    throw new Error("Request failed");
+  }
 
   const data = await res.json();
 
