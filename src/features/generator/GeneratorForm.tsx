@@ -11,7 +11,7 @@ type Props = {
   setDescription: (value: string) => void;
   selectedTags: string[];
   setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
-  onGenerate?: () => void;
+  onGenerate?: (isDemo?: boolean) => void;
 };
 
 export default function GeneratorForm({
@@ -75,8 +75,8 @@ export default function GeneratorForm({
 
         <button
           onClick={() => {
-            fillDemoData()
-            setTimeout(() => onGenerate?.(), 200);
+            fillDemoData();
+            setTimeout(() => onGenerate?.(true), 200);
           }}
           className="text-xs px-3 py-1.5 rounded-lg bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/30 transition whitespace-nowrap self-start md:self-center"
         >

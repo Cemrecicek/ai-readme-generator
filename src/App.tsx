@@ -12,7 +12,35 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleGenerate = async () => {
+
+  const demoMarkdown = `
+# Task Manager App
+
+A modern task management web application that helps users organize their daily tasks, track progress, and improve productivity.
+
+## Features
+- Task creation & management
+- Filtering and deadlines
+- Clean and responsive UI
+
+## Tech Stack
+- React
+- TypeScript
+- Tailwind CSS
+- Node.js
+`;
+
+
+  const handleGenerate = async (isDemo = false) => {
+
+    if (isDemo) {
+      setGeneratedMarkdown(demoMarkdown);
+      setError("");
+      setLoading(false);
+      return;
+    }
+
+
     setGeneratedMarkdown("");
     setLoading(true);
     setError("");
